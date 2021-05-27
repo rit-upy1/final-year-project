@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/Recommendation_Page.css') }}">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+</head>
+<body>
+
+<div id="header" width="100vw" height="40vh">
+	
+	<div class="heading">WELCOME TO THE MULTIMEDIA RECOMMENDATION PAGE</div>
+	
+
+</div>
+
+
+<div id="bloglink">
+<div style="margin-top:-40px"></div>
+<div id="pic" >
+<p class="border" style="margin-left:152px;margin-right:20px">
+<span style="font-family:century gothic;font-weight: bold;font-size:30px">RECOMMENDATION</span><br>
+</p>
+
+
+<p style="font-family:century gothic;margin-left:152px;margin-right:135px;font-size:18px">These are the recommended multimedia based on emotion recognition</p>
+</div>
+</div>
+
+<div class="swiper-container" >
+<h1> Recommended Movies </h1>
+    <div class="swiper-wrapper">
+    {% set actor1_names = movies['actor1_names'] %}
+    {% set actor2_names = movies['actor2_names'] %}
+    {% set director_names = movies['director_names'] %}
+    {% for title in movies['movie_titles'] %}
+      <div class="swiper-slide">
+      
+        <figure>
+          
+          <figcaption>
+            <div class="containertext" style="top:5vh">
+              <p >
+                <span style="font-family:century gothic;font-weight: bold;font-size:22px;margin-center:-200px">{{title}} </span><br>
+                <span style="font-family:century gothic;font-size:15px;margin-center:-127px" /> Actors: {{actor1_names[loop.index]}},{{actor2_names[loop.index]}}</span><br>
+                <span style="font-family:century gothic;font-size:15px;margin-center:-127px" /> Director: {{director_names[loop.index]}}</span>
+              </p>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    {% endfor %}
+    </div>
+	<div class="swiper-button-next" style="color:#abadad"></div>
+  <div class="swiper-button-prev" style="color:#abadad"></div>
+ </div>
+</div>
+
+<div class="swiper-container">
+  <h1> Recommended Music </h1>
+  <div class="swiper-wrapper">
+    {% 
+      set artists = music['music_artists']
+    %}
+    {% for music_title in music['music_titles'] %}
+
+    <div class="swiper-slide">
+      
+        <figure>
+          
+          <figcaption>
+            <div class="containertext" style="top:5vh">
+              <p >
+                <span style="font-family:century gothic;font-weight: bold;font-size:22px;margin-center:-200px">Title: {{music_title}} </span><br>
+                <span style="font-family:century gothic;font-size:15px;margin-center:-127px" /> Artists: {{ artists[loop.index]}}</span><br>
+                
+              </p>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="swiper-button-next" style="color:#abadad"></div>
+  <div class="swiper-button-prev" style="color:#abadad"></div>
+</div>
+</div>
+
+<div class="swiper-container">
+  <h1> Recommended Games </h1>
+  <div class="swiper-wrapper">
+    {% set platforms = games['game_platforms'] %}
+    {% set publishers = games['game_publishers'] %}
+    {% for game_title in games['game_titles'] %}
+<div class="swiper-slide">
+
+  <figure>
+
+    <figcaption>
+      <div class="containertext" style="top:5vh">
+        <p>
+          <span style="font-family:century gothic;font-weight: bold;font-size:22px;margin-center:-200px">Title:{{game_title}}
+          </span><br>
+          <span style="font-family:century gothic;font-size:15px;margin-center:-127px" />
+          Publisher :{{publishers[loop.index]}}</span><br>
+          <span style="font-family:century gothic;font-size:15px;margin-center:-127px" /> 
+          Platforms : {{platforms[loop.index]}}</span><br>
+        </p>
+      </div>
+    </figcaption>
+  </figure>
+</div>
+    
+    {% endfor %}
+  </div>
+  <div class="swiper-button-next" style="color:#abadad"></div>
+  <div class="swiper-button-prev" style="color:#abadad"></div>
+</div>
+</div>
+
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+
+var swiper = new Swiper('.swiper-container', {
+      slidesPerView: '3',
+      centeredSlides: true,
+      spaceBetween: -49,
+	  loop:true,
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'fraction',
+      },
+	  navigation:{
+	  nextEl:'.swiper-button-next',
+	  prevEl:'.swiper-button-prev',
+	  }
+    });
+
+
+
+var cur_url=window.location.href.split('#')[1];
+var pri=parseInt(cur_url,10);
+var mybutton = document.getElementById("myBtn");
+var foot=document.getElementById("footer2");
+var stopheight=parseInt(document.body.scrollHeight)-parseInt(foot.scrollHeight);
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+	
+  if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0 ) {
+	
+    mybutton.style.display = "inline-block";
+	var h = window.innerHeight;
+	var mi=parseInt(h)-150;
+	var offtop=parseInt(document.documentElement.scrollTop)+mi;
+	var s=offtop.toString();
+	var f=s.concat("px");
+	var g=4390+mi;
+	var strg=g.toString();
+	var fixbut=strg.concat("px");
+	
+	if(document.documentElement.scrollTop<4390){
+	mybutton.style.top=f;
+	}
+	else{
+	mybutton.style.top=fixbut;
+	}
+	
+  }
+  else {
+    mybutton.style.display = "none";
+  }
+ 
+}
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
+function myFunction(x) {
+  x.classList.toggle("change");
+}
+function mouseOver() {
+  document.getElementById("demo").style.opacity = "0.5";
+}
+function mouseOut() {
+  document.getElementById("demo").style.opacity = "1";
+}
+var sw=screen.width;
+function openNav() {
+  if(sw<=600){
+  document.getElementById("myNav").style.width = "100vw";
+  }
+  else{
+  document.getElementById("myNav").style.width = "25vw";
+  }
+  document.getElementById("header").setAttribute('class', 'blur');
+  
+}
+
+function closeNav() {
+  document.getElementById("myNav").style.width = "0vw";
+  document.getElementById("header").removeAttribute('class','blur');
+}
+if(sw>600){
+document.getElementById("bloglink_mob").style.display="none";
+
+}
+if(sw<600){
+document.getElementById("bloglink").style.display="none";
+
+}
+if(sw>600){
+document.getElementById("slideimage").style.display="none";
+
+}
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  slides[slideIndex-1].style.display = "inline-block";  
+}
+</script>
+</body>
+</html>

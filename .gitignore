@@ -1,0 +1,20 @@
+#ignore picture files
+*.png
+
+*.jpg
+
+#ignore pycache
+**/__pycache__/**
+
+#ignore music files
+*.wav
+
+/mylearn
+/AJAX-Movie-Recommendation-System-with-Sentiment-Analysis-master
+/spotify_testing
+/flask-testing/camera-testing
+/flask-testing/dataframe-printing
+/Hyperparameter testing
+*.json
+*.csv
+

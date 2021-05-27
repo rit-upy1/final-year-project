@@ -1,0 +1,49 @@
+{% extends 'base.html'%}
+
+{% block head %} 
+<title>recommendations</title>
+{% endblock %}
+
+
+
+{% block body %}
+
+<form action="/" method="POST">
+    <input type="text" name="content" id="content">
+    <input type="submit" value="Get movie recommendations">    
+</form>
+<table>
+<p style="color: blueviolet;font-size: 64px;font-weight: bold;">Game recommendation</p>
+<tr>
+    {% for recommendation in game_recommendations %}
+        
+        {{recommendation | safe}}
+    {% endfor %}
+</tr>
+</table>
+<br>
+<br>
+<br>
+<p style="color: fuchsia;font-size: 64px;font-weight: bold; font-style: italic;">Movie recommendation</p>
+<table>
+    <tr>
+        {% for title in movie_titles %}
+            
+           <p> {{title}} </p>
+           <p> {{actor1_names[loop.index]}} </p> 
+        {% endfor %}
+    </tr>
+</table>
+<br>
+<br>
+<br>
+<p style="color: gold;font-size: 64px;font-weight: bold; font-style: italic;">Movie recommendation</p>
+<table>
+    <tr>
+        {% for recommendations in music_recommendations %}
+        
+        {{recommendations | safe}}
+        {% endfor %}
+    </tr>
+</table>
+{% endblock %}
